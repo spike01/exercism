@@ -1,9 +1,13 @@
 package pangram;
 
 public class Pangrams {
+
+    public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+
     public static boolean isPangram(String sentence) {
-        for(char letter: "abcdefghijklmnopqrstuvwxyz".toCharArray()) {
-            if (sentence.toLowerCase().indexOf(letter) == -1) {
+        String lowerCaseSentence = sentence.toLowerCase();
+        for(char letter: ALPHABET.toCharArray()) {
+            if (lowerCaseSentence.indexOf(letter) == -1) {
                 return false;
             }
         }
