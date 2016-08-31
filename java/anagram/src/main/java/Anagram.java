@@ -1,7 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import static java.util.Arrays.sort;
 
 public class Anagram {
     private final String word;
@@ -13,15 +12,22 @@ public class Anagram {
     public List<String> match(List<String> candidates) {
         ArrayList<String> matches = new ArrayList();
         for (String candidate: candidates) {
-            char[] candidateLetters = candidate.toLowerCase().toCharArray();
-            char[] letters = word.toLowerCase().toCharArray();
-            sort(candidateLetters);
-            sort(letters);
-
-            if ((new String(candidateLetters)).equals(new String(letters)) && !(candidate.toLowerCase().equals(word.toLowerCase()))) {
+            if (isAnagram(candidate) && !isLowerCaseDuplicate(candidate)) {
                     matches.add(candidate);
                 }
         }
         return matches;
+    }
+
+    private boolean isAnagram(String candidate) {
+        char[] candidateLetters = candidate.toLowerCase().toCharArray();
+        char[] wordLetters = word.toLowerCase().toCharArray();
+        Arrays.sort(candidateLetters);
+        Arrays.sort(wordLetters);
+        return new String(candidateLetters).equals(new String(wordLetters));
+    }
+
+    private boolean isLowerCaseDuplicate(String candidate) {
+        return candidate.toLowerCase().equals(word.toLowerCase());
     }
 }
